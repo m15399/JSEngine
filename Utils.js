@@ -19,3 +19,7 @@ JSE.Utils.ListSources = function(){
 JSE.Utils.TimeInSec = function(){
 	return Date.now() / 1000.0;
 }
+
+JSE.Utils.Random = function(min, max){
+	return (Math.random() * (max - min)) + min;
+}

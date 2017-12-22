@@ -7,9 +7,11 @@ JSE.g_sources = [];
 // JSE.g_sources.push('Engine.js');
 
 var noIncludes = false;
+var includes = [];
 
 if (window.JSE_CONFIG != undefined){
-	JSE_CONFIG.noIncludes;
+	noIncludes = JSE_CONFIG.noIncludes;
+	includes = JSE_CONFIG.includes;
 }
 
 JSE.Include = function(path){
@@ -26,12 +28,20 @@ JSE.Include('Class.js');
 JSE.Include('Utils.js');
 JSE.Include('Config.js');
 JSE.Include('Screen.js');
+JSE.Include('GameObject.js');
 JSE.Include('Game.js');
+
+for(var i = 0; i < includes.length; i++){
+	var file = includes[i];
+	JSE.Include(file);
+}
 
 // Startup
 //
 window.onload = function(){
 	g_config = Create(JSE.Config, window.JSE_CONFIG);
+
+
 	
 	if (g_config.runTests){
 		JSE.RunTests();
@@ -42,4 +52,7 @@ window.onload = function(){
 	}
 
 	g_game = Create(JSE.Game);
+
+	if(JSE_START)
+		JSE_START();
 };

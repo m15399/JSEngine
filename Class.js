@@ -22,6 +22,8 @@ JSE.Class = function(){
 	return c;
 }
 
+var Class = JSE.Class;
+
 JSE.Create = function(clas){
 	var o = Object.create(clas);
 
