@@ -5,15 +5,18 @@ function JSE_START(){
 	g_testGame = Create(TestGame);
 }
 
-var TestGame = JSE.Class();
+var TestGame = JSE.Class(GameObject);
 
 TestGame.Init = function(){
-	this.blocks = [];
+	// this.blocks = [];
+}
 
-	for(var i = 0 ; i < 100; i++){
+TestGame.Update = function(){
+	for(var i = 0 ; i < 10; i++){
 		var xs = 3;
 		var ys = 3;
-		this.blocks.push(Create(Blocko, 0, 0, JSE.Utils.Random(-xs, xs), JSE.Utils.Random(-ys, ys)));
+		// this.blocks.push(Create(Blocko, 0, 0, JSE.Utils.Random(-xs, xs), JSE.Utils.Random(-ys, ys)));
+		Create(Blocko, 0, 0, JSE.Utils.Random(-xs, xs), JSE.Utils.Random(-ys, ys));
 	}
 }
 
@@ -24,6 +27,7 @@ Blocko.Init = function(x, y, xv, yv){
 	this.y = y;
 	this.xv = xv;
 	this.yv = yv;
+	this.lifetime = 50;
 }
 
 Blocko.Update = function(){
@@ -33,6 +37,11 @@ Blocko.Update = function(){
 	var fric = .994;
 	this.xv *= fric;
 	this.yv *= fric;
+
+	this.lifetime--;
+	if(this.lifetime <= 0){
+		this.Destroy();
+	}
 }
 
 Blocko.Draw = function(g){

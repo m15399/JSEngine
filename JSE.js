@@ -4,7 +4,6 @@
 var JSE = {};
 
 JSE.g_sources = [];
-// JSE.g_sources.push('Engine.js');
 
 var noIncludes = false;
 var includes = [];
@@ -41,8 +40,6 @@ for(var i = 0; i < includes.length; i++){
 window.onload = function(){
 	g_config = Create(JSE.Config, window.JSE_CONFIG);
 
-
-	
 	if (g_config.runTests){
 		JSE.RunTests();
 	}
@@ -53,6 +50,7 @@ window.onload = function(){
 
 	g_game = Create(JSE.Game);
 
-	if(JSE_START)
+	if(window.JSE_START){
 		JSE_START();
+	}
 };
