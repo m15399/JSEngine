@@ -11,7 +11,7 @@ TestGame.Init = function(){
 	g_testGame = this;
 
 	var config = {};
-	config.framerate = 12;
+	// config.framerate = 12;
 
 	this.Call(JSE.Game.Init, config);
 
