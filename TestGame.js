@@ -2,12 +2,19 @@
 var g_testGame;
 
 function JSE_START(){
-	g_testGame = Create(TestGame);
+	Create(TestGame);
 }
 
-var TestGame = JSE.Class(GameObject);
+var TestGame = JSE.Class(JSE.Game);
 
 TestGame.Init = function(){
+	g_testGame = this;
+
+	var config = {};
+	config.framerate = 12;
+
+	this.Call(JSE.Game.Init, config);
+
 	// this.blocks = [];
 }
 

@@ -39,7 +39,7 @@ JSE.Create = function(clas){
 
 	InitObject(clas);
 
-	// Run o.Init, which can call SuperInit manually
+	// Run o.Init, which can call Call(Super.Init, args) manually
 	//
 	var args = Array.prototype.slice.call(arguments, 1);
 	clas.Init.apply(o, args);
@@ -51,9 +51,9 @@ var Create = JSE.Create;
 
 JSE.Base = {};
 
-JSE.Base.SuperInit = function(base){
+JSE.Base.Call = function(f){
 	var args = Array.prototype.slice.call(arguments, 1);
-	base.Init.apply(this, args);
+	f.apply(this, args);
 }
 
 JSE.Mixin = function(a, b){
@@ -108,7 +108,7 @@ JSE.AddTest('Class', function(){
 	var TestClass = JSE.Class(CA, CB);
 
 	TestClass.Init = function(a){
-		this.SuperInit(CA, 123);
+		this.Call(CA.Init, 123);
 		this.arg = a;
 	}
 

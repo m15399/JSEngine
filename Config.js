@@ -5,13 +5,18 @@ JSE.Config = JSE.Class();
 
 JSE.Config.Init = function(userConfig){
 
+	this.loadAsLib = false;
+
 	this.width = 800;
 	this.height = 600;
 	this.runTests = true;
 	this.quietTests = true;
 
-	this.listSources = false;
+	// Can use noIncludes/listSources to migrate to direct includes on the page
+	//
+	this.includes = [];
 	this.noIncludes = false;
+	this.listSources = false;
 
 	// Mixin JSE_CONFIG
 	//

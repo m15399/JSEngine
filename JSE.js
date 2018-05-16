@@ -10,7 +10,7 @@ var includes = [];
 
 if (window.JSE_CONFIG != undefined){
 	noIncludes = JSE_CONFIG.noIncludes;
-	includes = JSE_CONFIG.includes;
+	includes = JSE_CONFIG.includes || includes;
 }
 
 JSE.Include = function(path){
@@ -29,6 +29,7 @@ JSE.Include('Config.js');
 JSE.Include('Screen.js');
 JSE.Include('GameObject.js');
 JSE.Include('Game.js');
+JSE.Include('LibGame.js');
 
 for(var i = 0; i < includes.length; i++){
 	var file = includes[i];
@@ -48,7 +49,13 @@ window.onload = function(){
 		JSE.Utils.ListSources();
 	}
 
-	g_game = Create(JSE.Game);
+	g_gameObjectManager = Create(JSE.GameObjectManager);
+
+	// g_game = Create(JSE.Game);
+
+	if (g_config.loadAsLib){
+		Create(LibGame);
+	}
 
 	if(window.JSE_START){
 		JSE_START();
