@@ -5,6 +5,13 @@ var JSE = {};
 
 JSE.g_sources = [];
 
+var jsePath;
+(function(){
+	var allScripts = document.getElementsByTagName('script');
+	var path = allScripts[allScripts.length - 1].src.split('?')[0];
+	jsePath = path.split('/').slice(0, -1).join('/')+'/';
+})();
+
 var noIncludes = false;
 var includes = [];
 
@@ -13,7 +20,11 @@ if (window.JSE_CONFIG != undefined){
 	includes = JSE_CONFIG.includes || includes;
 }
 
-JSE.Include = function(path){
+JSE.Include = function(path, external){
+	if (!external){
+		path = jsePath + path;
+	}
+
 	JSE.g_sources.push(path);
 	if(!noIncludes){
 		var script = document.createElement('script');
@@ -33,7 +44,7 @@ JSE.Include('LibGame.js');
 
 for(var i = 0; i < includes.length; i++){
 	var file = includes[i];
-	JSE.Include(file);
+	JSE.Include(file, true);
 }
 
 // Startup
